@@ -8,4 +8,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="ToolBarTitleTextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+    
+    <style name="Theme.ToolBar.More" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow.More</item>
+    </style>
+    
+    <style name="ActionButton.Overflow.More" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@mipmap/more_icon</item>
+    </style>
+    
+    
+    
+
 </resources>

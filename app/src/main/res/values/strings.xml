@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">游记</string>
+
+    <string name="tool_bar_title">游记</string>
+    <string name="action_0">离线浏览</string>
+    <string name="action_1">反馈</string>
+    <string name="action_2">设置</string>
+
+
 </resources>
