@@ -6,4 +6,9 @@
 
     <color name="toolbar_bcg_color">#019BE1</color>
 
+    <color name="view_pager_background">#F4F4F4</color>
+
+    <color name="tab_selected_color">#019BE1</color>
+    <color name="tab_indicator_color">#019BE1</color>
+
 </resources>
