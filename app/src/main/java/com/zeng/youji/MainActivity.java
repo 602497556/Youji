@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
         mToolBar = (Toolbar) findViewById(R.id.tool_bar);
         mToolBar.inflateMenu(R.menu.toolbar_menu);
 
@@ -44,13 +45,16 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),fragments);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setOffscreenPageLimit(3);
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
-
     }
 
+    /*
+    添加对应的Fragment
+     */
     private void addFragments() {
         fragments.add(new FragmentTab1());
         fragments.add(new FragmentTab2());

@@ -24,8 +24,7 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/view_pager_background"
-        android:padding="@dimen/view_pager_padding" />
+        android:background="@color/view_pager_background"/>
 
 
 
