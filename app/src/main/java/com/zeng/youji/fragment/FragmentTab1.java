@@ -18,8 +18,8 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.zeng.youji.R;
-import com.zeng.youji.adapter.DateAdapter;
-import com.zeng.youji.bean.Date;
+import com.zeng.youji.adapter.Bean1Adapter;
+import com.zeng.youji.bean.Bean1;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -28,35 +28,33 @@ public class FragmentTab1 extends Fragment {
 
     private ListView mListView;
 
-    private DateAdapter mDateAdapter;
+    private Bean1Adapter adapter;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab1, container, false);
         mListView = (ListView) view.findViewById(R.id.list_view);
-        getDate("http://chanyouji.com/api/trips/featured.json?page=1");
+        getData("http://chanyouji.com/api/trips/featured.json?page=1");
         return view;
     }
 
     /*
     使用xUtils发送网络请求，在onSuccess()方法中通过Gson解析得到数据
      */
-    private void getDate(String url) {
+    private void getData(String url) {
         HttpUtils http = new HttpUtils();
-        http.send( HttpRequest.HttpMethod.GET,
-                    url,
-                    new RequestCallBack<String>() {
+        http.send( HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
 
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         Log.d("******************",responseInfo.result+"**************");
-                        Type listType = new TypeToken<List<Date>>(){}.getType();
+                        Type listType = new TypeToken<List<Bean1>>(){}.getType();
                         Gson gson = new Gson();
-                        List<Date> dateList = gson.fromJson(responseInfo.result,listType);
+                        List<Bean1> dateList = gson.fromJson(responseInfo.result,listType);
                         if(dateList != null){
-                            mDateAdapter = new DateAdapter(getContext(),R.layout.list_view_item,dateList);
-                            mListView.setAdapter(mDateAdapter);
+                            adapter = new Bean1Adapter(getContext(),R.layout.list_view_item,dateList);
+                            mListView.setAdapter(adapter);
                         }
                     }
 

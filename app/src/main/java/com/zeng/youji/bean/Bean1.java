@@ -3,7 +3,7 @@ package com.zeng.youji.bean;
 /**
  * Created by Administrator on 16-7-12.
  */
-public class Date {
+public class Bean1 {
 
     private long id;
     private String name;

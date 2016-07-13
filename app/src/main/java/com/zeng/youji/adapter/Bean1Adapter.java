@@ -13,14 +13,14 @@ import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapCommonUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.zeng.youji.R;
-import com.zeng.youji.bean.Date;
+import com.zeng.youji.bean.Bean1;
 
 import java.util.List;
 
 /**
  * Created by Administrator on 16-7-12.
  */
-public class DateAdapter extends ArrayAdapter<Date> {
+public class Bean1Adapter extends ArrayAdapter<Bean1> {
 
     private int resourceId;
 
@@ -29,7 +29,7 @@ public class DateAdapter extends ArrayAdapter<Date> {
     private BitmapUtils bitmapUtils;
     private BitmapDisplayConfig config;
 
-    public DateAdapter(Context context,int textViewResourceId,List<Date> dates){
+    public Bean1Adapter(Context context, int textViewResourceId, List<Bean1> dates){
         super(context,textViewResourceId,dates);
         resourceId = textViewResourceId;
         mContext = context;
@@ -41,7 +41,7 @@ public class DateAdapter extends ArrayAdapter<Date> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Date item = getItem(position);
+        Bean1 item = getItem(position);
         View view;
         ViewHolder holder;
         if(convertView == null){
@@ -53,7 +53,6 @@ public class DateAdapter extends ArrayAdapter<Date> {
             holder.tvName = (TextView) view.findViewById(R.id.tv_name);
             holder.tvDays = (TextView) view.findViewById(R.id.tv_days);
             holder.tvPhotosCount = (TextView) view.findViewById(R.id.tv_photos_count);
-            holder.bitmapUtils = bitmapUtils;
             view.setTag(holder);
         } else {
             view = convertView;
@@ -63,8 +62,8 @@ public class DateAdapter extends ArrayAdapter<Date> {
         holder.tvDate.setText(item.getStart_date());
         holder.tvDays.setText("/"+item.getDays()+"天");
         holder.tvPhotosCount.setText(item.getPhotos_count()+"图");
-        holder.bitmapUtils.display(holder.ivCoverPhoto,item.getFront_cover_photo_url(),config);
-        holder.bitmapUtils.display(holder.ivUserImage,item.getUser().getImage(),config);
+        bitmapUtils.display(holder.ivCoverPhoto,item.getFront_cover_photo_url(),config);
+        bitmapUtils.display(holder.ivUserImage,item.getUser().getImage(),config);
         return view;
     }
 
@@ -75,7 +74,6 @@ public class DateAdapter extends ArrayAdapter<Date> {
         TextView tvDate;
         TextView tvDays;
         TextView tvPhotosCount;
-        BitmapUtils bitmapUtils;
     }
 
 

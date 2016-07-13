@@ -11,4 +11,6 @@
     <color name="tab_selected_color">#019BE1</color>
     <color name="tab_indicator_color">#019BE1</color>
 
+    <color name="list_view_divider">#F4F4F4</color>
+
 </resources>
