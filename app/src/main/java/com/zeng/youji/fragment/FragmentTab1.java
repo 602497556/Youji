@@ -63,9 +63,7 @@ public class FragmentTab1 extends Fragment {
                         Toast.makeText(getActivity(),"网络连接出错！",Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
-
-
-
 
 }

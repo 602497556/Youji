@@ -7,33 +7,33 @@ import java.util.List;
  */
 public class Area {
 
-    private string category;
-    private List<Destination> destinationList;
+    private String category;
+    private List<Destination> destinations;
 
 
-    public string getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public List<Destination> getDestinationList() {
-        return destinationList;
+    public List<Destination> getDestinations() {
+        return destinations;
     }
 
     public static class Destination {
         private int id;
-        private string name_zh_cn;
-        private string name_en;
+        private String name_zh_cn;
+        private String name_en;
         private int poi_count;
         private double lat;
         private double lng;
-        private string image_url;
+        private String image_url;
         private long updated_at;
 
         public int getId() {
             return id;
         }
 
-        public string getName_zh_cn() {
+        public String getName_zh_cn() {
             return name_zh_cn;
         }
 
@@ -41,7 +41,7 @@ public class Area {
             return updated_at;
         }
 
-        public string getImage_url() {
+        public String getImage_url() {
             return image_url;
         }
 
@@ -57,7 +57,7 @@ public class Area {
             return poi_count;
         }
 
-        public string getName_en() {
+        public String getName_en() {
             return name_en;
         }
 
