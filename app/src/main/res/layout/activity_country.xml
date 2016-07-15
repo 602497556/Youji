@@ -1,20 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
+    android:background="#F4F4F4"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
     android:paddingTop="8dp">
 
-
-
     <ListView
-        android:id="@+id/tab2_list_view"
+        android:id="@+id/lv_activity_country"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/list_view_divider"
-        android:dividerHeight="15dp"
-        android:focusable="false"/>
-
+        android:dividerHeight="10dp"
+        android:divider="@color/list_view_divider"/>
 
 
 </LinearLayout>

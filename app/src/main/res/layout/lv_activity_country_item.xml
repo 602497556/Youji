@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/iv_activity_country_item"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="fitXY"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/tv_activity_country_item_name_ch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="国名"
+        android:textSize="25dp"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/tv_activity_country_item_name_en"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_activity_country_item_name_ch"
+        android:layout_alignBaseline="@id/tv_activity_country_item_name_ch"
+        android:layout_marginLeft="8dp"
+        android:text="英文名"
+        android:textSize="22sp"
+        android:textColor="@android:color/white"/>
+
+    <LinearLayout
+        android:id="@+id/ll_activity_country_item"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/iv_activity_country_item"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:id="@+id/ll_activity_country_item_tab0"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/btn_tab_bottom_homepage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:clickable="false"
+                android:src="@mipmap/tips_destination_normal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="攻略"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_activity_country_item_tab1"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/btn_tab_bottom_hot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:clickable="false"
+                android:src="@mipmap/trip_destination_normal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="行程"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_activity_country_item_tab2"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/btn_tab_bottom_classify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:clickable="false"
+                android:src="@mipmap/travel_destination_normal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="旅行地"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_activity_country_item_tab3"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/btn_tab_bottom_my"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:clickable="false"
+                android:src="@mipmap/special_destination_normal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="专题"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/ll_activity_country_item"
+        android:layout_marginTop="6dp"
+        android:background="@android:color/darker_gray"/>
+
+</RelativeLayout>

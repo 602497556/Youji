@@ -68,13 +68,7 @@ public class AreaDataAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.tvCategory.setText(areas[i]);
-
         List<Area.Destination> destinations = areaList.get(i).getDestinations();
-//        if(destinations == null){
-//            Log.d("***********",destinations+"为空************");
-//        } else {
-//            Log.d("***********",destinations.size()+"************");
-//        }
         GridViewAdapter gridViewAdapter  = new GridViewAdapter(mContext,destinations);
         holder.myGridView.setAdapter(gridViewAdapter);
         return convertView;

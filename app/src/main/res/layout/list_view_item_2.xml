@@ -10,7 +10,7 @@
         android:layout_height="30dp"
         android:layout_marginLeft="8dp"
         android:text="Category"
-        android:textSize="18sp"/>
+        android:textSize="20sp"/>
 
     <View
         android:layout_width="match_parent"

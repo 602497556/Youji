@@ -1,17 +1,23 @@
 package com.zeng.youji.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapCommonUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
+import com.zeng.youji.CountryActivity;
+import com.zeng.youji.MainActivity;
 import com.zeng.youji.R;
 import com.zeng.youji.bean.Area;
 
@@ -62,29 +68,43 @@ public class GridViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View convertView, ViewGroup viewGroup) {
-        Area.Destination destination = (Area.Destination) getItem(i);
+    public View getView(final int i, View convertView, ViewGroup viewGroup) {
+        final Area.Destination destination = (Area.Destination) getItem(i);
         ViewHolder holder;
         if(convertView == null){
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.grid_view_item,null,false);
-            holder.ivCountry = (ImageView) convertView.findViewById(R.id.iv_country);
+
+            holder.ivCountry = (ImageButton) convertView.findViewById(R.id.iv_country);
             holder.tvNameCh = (TextView) convertView.findViewById(R.id.tv_name_ch_cn);
             holder.tvNameEn = (TextView) convertView.findViewById(R.id.tv_name_en);
             holder.tvNumberPlace = (TextView) convertView.findViewById(R.id.tv_num_place);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        bitmapUtils.display(holder.ivCountry,destination.getImage_url(),displayConfig);
         holder.tvNameCh.setText(destination.getName_zh_cn());
         holder.tvNameEn.setText(destination.getName_en());
         holder.tvNumberPlace.setText(destination.getPoi_count()+"个旅行地");
+
+        bitmapUtils.display(holder.ivCountry,destination.getImage_url(),displayConfig);
+
+        holder.ivCountry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext,"你点击了："+i,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext,CountryActivity.class);
+                intent.putExtra("id",destination.getId());
+                mContext.startActivity(intent);
+            }
+        });
+
         return convertView;
     }
 
     private class ViewHolder {
-        ImageView ivCountry;
+        ImageButton ivCountry;
         TextView tvNameCh;
         TextView tvNameEn;
         TextView tvNumberPlace;
