@@ -23,10 +23,6 @@ public class CountryActivity extends AppCompatActivity {
 
     private ListView mListView;
 
-    private HttpUtils httpUtils;
-
-    private StringBuilder stringBuilder;
-
     private CityInfoAdapter cityInfoAdapter;
 
     @Override
@@ -36,8 +32,7 @@ public class CountryActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.lv_activity_country);
         int id = getIntent().getIntExtra("id",0);
         if(id != 0){
-            stringBuilder = new StringBuilder("http://chanyouji.com/api/destinations/").append(id).append(".json");
-            Log.d("***************",stringBuilder.toString()+"************");
+            StringBuilder stringBuilder = new StringBuilder("http://chanyouji.com/api/destinations/").append(id).append(".json");
             requestData(stringBuilder.toString());
         }
     }
@@ -46,7 +41,7 @@ public class CountryActivity extends AppCompatActivity {
     请求数据
      */
     private void requestData(String url) {
-        httpUtils = new HttpUtils();
+        HttpUtils httpUtils = new HttpUtils();
         httpUtils.send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
@@ -56,7 +51,7 @@ public class CountryActivity extends AppCompatActivity {
                 if(cItyInfoList != null){
                     Log.d("************",cItyInfoList.size()+"***********");
                     cityInfoAdapter = new CityInfoAdapter(getApplicationContext(),
-                                                            R.layout.lv_activity_country_item,
+                                                            R.layout.countryactivity_lv_item,
                                                             cItyInfoList);
                     mListView.setAdapter(cityInfoAdapter);
                 }

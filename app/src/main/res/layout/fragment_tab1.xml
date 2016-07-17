@@ -13,5 +13,4 @@
         android:divider="@color/list_view_divider"/>
 
 
-
 </LinearLayout>
