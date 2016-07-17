@@ -46,6 +46,7 @@ public class Trip {
     public static class TripDay {
         private long id;
         private int day;
+        private String trip_date;
         private Destination destination;
         private List<Node> nodes;
 
@@ -55,6 +56,10 @@ public class Trip {
 
         public int getDay() {
             return day;
+        }
+
+        public String getTrip_date(){
+            return trip_date;
         }
 
         public Destination getDestination() {
@@ -78,7 +83,7 @@ public class Trip {
             }
         }
 
-        public static class Node{
+        public static class Node {
             private long id;
             private List<Note> notes;
 
@@ -90,7 +95,7 @@ public class Trip {
                 return notes;
             }
 
-            public static class Note{
+            public static class Note {
                 private long id;
                 private int col;
                 private String description;
@@ -119,10 +124,7 @@ public class Trip {
                         return url;
                     }
                 }
-
             }
-
         }
-
     }
 }

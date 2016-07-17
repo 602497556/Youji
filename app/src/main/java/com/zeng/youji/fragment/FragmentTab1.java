@@ -1,12 +1,14 @@
 package com.zeng.youji.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,7 +19,9 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.zeng.youji.MainActivity;
 import com.zeng.youji.R;
+import com.zeng.youji.TripActivity;
 import com.zeng.youji.adapter.Bean1Adapter;
 import com.zeng.youji.bean.Bean1;
 
@@ -51,10 +55,20 @@ public class FragmentTab1 extends Fragment {
                         Log.d("******************",responseInfo.result+"**************");
                         Type listType = new TypeToken<List<Bean1>>(){}.getType();
                         Gson gson = new Gson();
-                        List<Bean1> dateList = gson.fromJson(responseInfo.result,listType);
+                        final List<Bean1> dateList = gson.fromJson(responseInfo.result,listType);
                         if(dateList != null){
                             adapter = new Bean1Adapter(getContext(),R.layout.list_view_item,dateList);
                             mListView.setAdapter(adapter);
+                            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
+                                    Toast.makeText(getContext(),"你点击了："+i,Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getContext(), TripActivity.class);
+                                    intent.putExtra("trip_id",dateList.get(i).getId());
+                                    startActivity(intent);
+
+                                }
+                            });
                         }
                     }
 

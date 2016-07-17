@@ -76,12 +76,10 @@ public class AreaDataAdapter extends BaseAdapter {
 
 
 
-
     private class ViewHolder{
         TextView tvCategory;
         MyGridView myGridView;
     }
-
 
 
 }
