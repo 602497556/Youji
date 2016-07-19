@@ -14,9 +14,11 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.zeng.youji.adapter.TripActivityListViewAdapter;
+import com.zeng.youji.adapter.TripActivityListViewAdapter2;
 import com.zeng.youji.bean.Trip;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TripActivity extends AppCompatActivity {
@@ -26,6 +28,8 @@ public class TripActivity extends AppCompatActivity {
     private HttpUtils httpUtils;
 
     private TripActivityListViewAdapter lvAdapter;
+
+    private TripActivityListViewAdapter2 adapter2;
 
     private ListView listView;
 
@@ -53,8 +57,31 @@ public class TripActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     Trip tripData = gson.fromJson(responseInfo.result,Trip.class);
                     Log.d("***************", tripData.getName());
-                    lvAdapter = new TripActivityListViewAdapter(getApplicationContext(),tripData.getTrip_days());
-                    listView.setAdapter(lvAdapter);
+//                    lvAdapter = new TripActivityListViewAdapter(getApplicationContext(),tripData.getTrip_days());
+//                    listView.setAdapter(lvAdapter);
+                    List<Trip.TripDay.Node> nodeList;
+                    List<Trip.TripDay.Node.Note> noteList;
+                    List<Trip.TripDay.Node.Note> noteListTotal = new ArrayList<>();
+                    List<Trip.TripDay> tripDayList = tripData.getTrip_days();
+                    for(int i=0; i<tripDayList.size();i++){
+                        String trip_date = tripDayList.get(i).getTrip_date();
+                        int day = tripDayList.get(i).getDay();
+                        nodeList = tripDayList.get(i).getNodes();
+                            for(int j=0; j<nodeList.size();j++){
+                                noteList = nodeList.get(j).getNotes();
+                                if(noteList != null){
+                                    for(Trip.TripDay.Node.Note note : noteList){
+                                        note.setTrip_date_note(trip_date);
+                                        note.setDay_note(day);
+                                        noteListTotal.add(note);
+                                    }
+
+                                }
+                            }
+                    }
+                    Log.d("************",noteListTotal.size()+"");
+                    adapter2 = new TripActivityListViewAdapter2(getApplicationContext(),noteListTotal);
+                    listView.setAdapter(adapter2);
                 }
             }
 

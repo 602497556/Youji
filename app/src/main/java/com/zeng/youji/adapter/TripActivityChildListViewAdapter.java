@@ -78,10 +78,10 @@ public class TripActivityChildListViewAdapter extends BaseAdapter {
         if(!TextUtils.isEmpty(description) && !TextUtils.isEmpty(imageUrl)){
             holder.tvDescription.setText(description);
             bitmapUtils.display(holder.ivPic,imageUrl,displayConfig);
-        } else if(!TextUtils.isEmpty(imageUrl)) {
+        } else if(!TextUtils.isEmpty(imageUrl) && TextUtils.isEmpty(description)){
             holder.tvDescription.setVisibility(View.GONE);
             bitmapUtils.display(holder.ivPic,imageUrl,displayConfig);
-        } else if(!TextUtils.isEmpty(description)){
+        } else if(!TextUtils.isEmpty(description) && TextUtils.isEmpty(imageUrl)){
             holder.tvDescription.setText(description);
             holder.ivPic.setVisibility(View.GONE);
         }

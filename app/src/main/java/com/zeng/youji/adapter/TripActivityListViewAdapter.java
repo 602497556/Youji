@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.zeng.youji.R;
 import com.zeng.youji.bean.Trip;
-import com.zeng.youji.view.MYListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,7 @@ public class TripActivityListViewAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tvDay.setText("DAY "+tripDay.getDay());
+        holder.tvDay.setText("DAY"+tripDay.getDay()+" ,"+tripDay.getTrip_date());
 
         int nodeListLength = tripDay.getNodes().size();
         List<Trip.TripDay.Node.Note> noteList;

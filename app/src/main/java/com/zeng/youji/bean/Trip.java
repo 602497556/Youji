@@ -97,16 +97,13 @@ public class Trip {
 
             public static class Note {
                 private long id;
-                private int col;
                 private String description;
                 private Photo photo;
+                private String trip_date_note;
+                private int day_note;
 
                 public long getId() {
                     return id;
-                }
-
-                public int getCol() {
-                    return col;
                 }
 
                 public String getDescription() {
@@ -115,6 +112,22 @@ public class Trip {
 
                 public Photo getPhoto() {
                     return photo;
+                }
+
+                public String getTrip_date_note() {
+                    return trip_date_note;
+                }
+
+                public void setTrip_date_note(String trip_date_note) {
+                    this.trip_date_note = trip_date_note;
+                }
+
+                public int getDay_note() {
+                    return day_note;
+                }
+
+                public void setDay_note(int day_note) {
+                    this.day_note = day_note;
                 }
 
                 public static class Photo{
