@@ -32,6 +32,8 @@ public class TripActivityListViewAdapter2 extends BaseAdapter {
     private BitmapUtils bitmapUtils;
     private BitmapDisplayConfig config;
 
+    private String preDate;
+
 
     public TripActivityListViewAdapter2(Context context, List<Trip.TripDay.Node.Note> noteList){
         super();
@@ -61,7 +63,6 @@ public class TripActivityListViewAdapter2 extends BaseAdapter {
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         Trip.TripDay.Node.Note noteItem = (Trip.TripDay.Node.Note) getItem(i);
-        String date = noteItem.getTrip_date_note();
         ViewHolder holder;
         if(convertView == null){
             holder = new ViewHolder();
@@ -74,7 +75,7 @@ public class TripActivityListViewAdapter2 extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.tvDescription.setText(noteItem.getDescription());
-        holder.tvDay.setText("DAY"+noteItem.getDay_note()+" ,"+date);
+        holder.tvDay.setText("DAY"+noteItem.getDay_note()+" ,"+noteItem.getTrip_date_note());
         Trip.TripDay.Node.Note.Photo photo = noteItem.getPhoto();
         if(photo != null) {
             bitmapUtils.display(holder.ivPic,photo.getUrl(),config);

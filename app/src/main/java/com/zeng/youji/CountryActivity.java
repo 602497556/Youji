@@ -2,7 +2,10 @@ package com.zeng.youji;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,18 +26,35 @@ public class CountryActivity extends AppCompatActivity {
 
     private ListView mListView;
 
+    private Toolbar toolbar;
+
     private CityInfoAdapter cityInfoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_country);
-        mListView = (ListView) findViewById(R.id.lv_activity_country);
+        initView();
         int id = getIntent().getIntExtra("id",0);
         if(id != 0){
             StringBuilder stringBuilder = new StringBuilder("http://chanyouji.com/api/destinations/").append(id).append(".json");
             requestData(stringBuilder.toString());
         }
+    }
+
+    /*
+    初始化控件,给Toolbar的导航图标设置点击事件
+     */
+    private void initView() {
+        mListView = (ListView) findViewById(R.id.country_activity_lv);
+        toolbar = (Toolbar) findViewById(R.id.country_activity_tb);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     /*

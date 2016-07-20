@@ -34,8 +34,16 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@android:color/darker_gray</item>
     </style>
+
+
+    <!-- 顶部ToolBar导航的自定义主题 -->
+    <style name="MyCustomToolBarTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     
-    
-    
+
+
 
 </resources>

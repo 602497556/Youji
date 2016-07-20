@@ -2,7 +2,10 @@ package com.zeng.youji;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,11 +36,21 @@ public class TripActivity extends AppCompatActivity {
 
     private ListView listView;
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_trip);
         listView = (ListView) findViewById(R.id.trip_activity_lv);
+        toolbar = (Toolbar) findViewById(R.id.trip_activity_tb);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         long id = getIntent().getLongExtra("trip_id",0);
         stringBuilder = new StringBuilder("http://chanyouji.com/api/trips/").append(id).append(".json");
         //请求数据
