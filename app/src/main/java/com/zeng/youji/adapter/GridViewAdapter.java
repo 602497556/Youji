@@ -8,16 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapCommonUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
-import com.zeng.youji.CountryActivity;
-import com.zeng.youji.MainActivity;
+import com.zeng.youji.CountrySpotsActivity;
 import com.zeng.youji.R;
 import com.zeng.youji.bean.Area;
 
@@ -94,7 +91,7 @@ public class GridViewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext,"你点击了："+i,Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext,CountryActivity.class);
+                Intent intent = new Intent(mContext, CountrySpotsActivity.class);
                 intent.putExtra("id",destination.getId());
                 mContext.startActivity(intent);
             }

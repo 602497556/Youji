@@ -10,17 +10,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.zeng.youji.adapter.TripActivityListViewAdapter;
-import com.zeng.youji.adapter.TripActivityListViewAdapter2;
 import com.zeng.youji.bean.Trip;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +27,7 @@ public class TripActivity extends AppCompatActivity {
 
     private HttpUtils httpUtils;
 
-    private TripActivityListViewAdapter lvAdapter;
-
-    private TripActivityListViewAdapter2 adapter2;
+    private TripActivityListViewAdapter adapter;
 
     private ListView listView;
 
@@ -85,6 +80,7 @@ public class TripActivity extends AppCompatActivity {
                                 if(noteList != null){
                                     for(Trip.TripDay.Node.Note note : noteList){
                                         note.setTrip_date_note(trip_date);
+                                        trip_date = "";
                                         note.setDay_note(day);
                                         noteListTotal.add(note);
                                     }
@@ -93,8 +89,8 @@ public class TripActivity extends AppCompatActivity {
                             }
                     }
                     Log.d("************",noteListTotal.size()+"");
-                    adapter2 = new TripActivityListViewAdapter2(getApplicationContext(),noteListTotal);
-                    listView.setAdapter(adapter2);
+                    adapter = new TripActivityListViewAdapter(getApplicationContext(),noteListTotal);
+                    listView.setAdapter(adapter);
                 }
             }
 

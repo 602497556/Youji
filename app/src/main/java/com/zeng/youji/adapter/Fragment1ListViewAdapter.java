@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by Administrator on 16-7-12.
  */
-public class Bean1Adapter extends ArrayAdapter<Bean1> {
+public class Fragment1ListViewAdapter extends ArrayAdapter<Bean1> {
 
     private int resourceId;
 
@@ -29,7 +29,7 @@ public class Bean1Adapter extends ArrayAdapter<Bean1> {
     private BitmapUtils bitmapUtils;
     private BitmapDisplayConfig config;
 
-    public Bean1Adapter(Context context, int textViewResourceId, List<Bean1> dates){
+    public Fragment1ListViewAdapter(Context context, int textViewResourceId, List<Bean1> dates){
         super(context,textViewResourceId,dates);
         resourceId = textViewResourceId;
         mContext = context;

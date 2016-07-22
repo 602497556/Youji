@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by Administrator on 16-7-15.
  */
-public class CityInfoAdapter extends ArrayAdapter<CItyInfo> {
+public class CountrySpotsAdapter extends ArrayAdapter<CItyInfo> {
 
     private  int resourceId;
 
@@ -30,7 +30,7 @@ public class CityInfoAdapter extends ArrayAdapter<CItyInfo> {
     private BitmapDisplayConfig config;
 
 
-    public CityInfoAdapter(Context context, int textViewResourceId, List<CItyInfo> datas) {
+    public CountrySpotsAdapter(Context context, int textViewResourceId, List<CItyInfo> datas) {
         super(context, textViewResourceId,datas);
         resourceId = textViewResourceId;
         mContext = context;

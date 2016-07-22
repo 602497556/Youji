@@ -1,18 +1,21 @@
 package com.zeng.youji.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lidroid.xutils.BitmapUtils;
+import com.lidroid.xutils.bitmap.BitmapCommonUtils;
+import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.zeng.youji.R;
 import com.zeng.youji.bean.Trip;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,24 +23,34 @@ import java.util.List;
  */
 public class TripActivityListViewAdapter extends BaseAdapter {
 
-    private Context mContext;
+    private List<Trip.TripDay.Node.Note> noteList;
 
-    private List<Trip.TripDay> tripDaysList;
+    private LayoutInflater inflater;
 
-    public TripActivityListViewAdapter(Context context, List<Trip.TripDay> tripDays){
+    private BitmapUtils bitmapUtils;
+    private BitmapDisplayConfig config;
+
+    private HashMap<Integer,View> integerViewHashMap = new HashMap<>();
+
+
+    public TripActivityListViewAdapter(Context context, List<Trip.TripDay.Node.Note> noteList){
         super();
-        this.mContext = context;
-        this.tripDaysList = tripDays;
+        this.noteList = noteList;
+        inflater = LayoutInflater.from(context);
+        bitmapUtils = new BitmapUtils(context);
+        config = new BitmapDisplayConfig();
+        config.setBitmapConfig(Bitmap.Config.RGB_565);
+        config.setBitmapMaxSize(BitmapCommonUtils.getScreenSize(context));
     }
 
     @Override
     public int getCount() {
-        return tripDaysList.size();
+        return noteList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return tripDaysList.get(i);
+        return noteList.get(i);
     }
 
     @Override
@@ -47,60 +60,53 @@ public class TripActivityListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
-        Trip.TripDay tripDay = (Trip.TripDay) getItem(i);
+        Trip.TripDay.Node.Note noteItem = (Trip.TripDay.Node.Note) getItem (i);
         ViewHolder holder;
-        if(convertView == null){
+//        if(convertView == null){
+//            holder = new ViewHolder();
+//            convertView = inflater.inflate(R.layout.trip_activty_lv_item_2,null);
+//            holder.tvDay = (TextView) convertView.findViewById(R.id.trip_activity_lv_item_day);
+//            holder.ivPic = (ImageView) convertView.findViewById(R.id.trip_activity_lv_item_pic);
+//            holder.tvDescription = (TextView) convertView.findViewById(R.id.trip_activity_lv_item_description);
+//            convertView.setTag(holder);
+//        } else {
+//            holder = (ViewHolder) convertView.getTag();
+//        }
+//        holder.tvDescription.setText(noteItem.getDescription());
+//        holder.tvDay.setText("DAY"+noteItem.getDay_note()+" "+noteItem.getTrip_date_note());
+//        Trip.TripDay.Node.Note.Photo photo = noteItem.getPhoto();
+//        if(photo != null) {
+//            bitmapUtils.display(holder.ivPic,photo.getUrl(),config);
+//        }
+        if(integerViewHashMap.get(i) == null){
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.trip_activty_lv_item,null);
+            convertView = inflater.inflate(R.layout.trip_activty_lv_item,null);
             holder.tvDay = (TextView) convertView.findViewById(R.id.trip_activity_lv_item_day);
-            holder.myListView = (ListView) convertView.findViewById(R.id.trip_activity_lv_item_my_lv);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        holder.tvDay.setText("DAY"+tripDay.getDay()+" ,"+tripDay.getTrip_date());
+            holder.ivPic = (ImageView) convertView.findViewById(R.id.trip_activity_lv_item_pic);
+            holder.tvDescription = (TextView) convertView.findViewById(R.id.trip_activity_lv_item_description);
 
-        int nodeListLength = tripDay.getNodes().size();
-        List<Trip.TripDay.Node.Note> noteList;
-        List<Trip.TripDay.Node.Note> noteListTotal = new ArrayList<>();
-        TripActivityChildListViewAdapter lvChildAdapter;
-        for(int j=0; j<nodeListLength; j++){
-             noteList = tripDay.getNodes().get(j).getNotes();
-            if(noteList != null){
-                for(Trip.TripDay.Node.Note note : noteList){
-                    noteListTotal.add(note);
-                }
+            integerViewHashMap.put(i,convertView);
+            convertView.setTag(holder);
+
+            holder.tvDay.setText("DAY"+noteItem.getDay_note()+" "+noteItem.getTrip_date_note());
+            holder.tvDescription.setText(noteItem.getDescription());
+            Trip.TripDay.Node.Note.Photo photo = noteItem.getPhoto();
+            if(photo != null) {
+            bitmapUtils.display(holder.ivPic,photo.getUrl(),config);
+            } else {
+                holder.ivPic.setVisibility(View.GONE);
             }
-        }
-        if(noteListTotal != null){
-            lvChildAdapter = new TripActivityChildListViewAdapter(mContext,noteListTotal);
-            holder.myListView.setAdapter(lvChildAdapter);
-            setListViewHeightBasedOnChildren(holder.myListView);
+        } else {
+            convertView = integerViewHashMap.get(i);
         }
         return convertView;
-    }
-
-    private void setListViewHeightBasedOnChildren(ListView lv2) {
-        if( lv2 == null ) return;
-        ListAdapter listAdapter = lv2.getAdapter();
-        if( listAdapter == null ){
-            return;
-        }
-        int totalHeight = 0;
-        for(int i=0; i<listAdapter.getCount(); i++){
-            View listItem = listAdapter.getView(i, null, lv2);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-        ViewGroup.LayoutParams params = lv2.getLayoutParams();
-        params.height = totalHeight + (lv2.getDividerHeight()*(listAdapter.getCount()-1));
-        lv2.setLayoutParams(params);
     }
 
 
     class ViewHolder{
         TextView tvDay;
-        ListView myListView;
+        ImageView ivPic;
+        TextView tvDescription;
     }
 
 

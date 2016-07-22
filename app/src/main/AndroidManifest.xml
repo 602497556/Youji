@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CountryActivity" />
+        <activity android:name=".CountrySpotsActivity" />
         <activity android:name=".TripActivity"></activity>
     </application>
 

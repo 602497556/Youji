@@ -19,10 +19,9 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-import com.zeng.youji.MainActivity;
 import com.zeng.youji.R;
 import com.zeng.youji.TripActivity;
-import com.zeng.youji.adapter.Bean1Adapter;
+import com.zeng.youji.adapter.Fragment1ListViewAdapter;
 import com.zeng.youji.bean.Bean1;
 
 import java.lang.reflect.Type;
@@ -32,7 +31,7 @@ public class FragmentTab1 extends Fragment {
 
     private ListView mListView;
 
-    private Bean1Adapter adapter;
+    private Fragment1ListViewAdapter adapter;
 
 
     @Override
@@ -57,7 +56,7 @@ public class FragmentTab1 extends Fragment {
                         Gson gson = new Gson();
                         final List<Bean1> dateList = gson.fromJson(responseInfo.result,listType);
                         if(dateList != null){
-                            adapter = new Bean1Adapter(getContext(),R.layout.list_view_item,dateList);
+                            adapter = new Fragment1ListViewAdapter(getContext(),R.layout.fragment_1_lv_item,dateList);
                             mListView.setAdapter(adapter);
                             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override

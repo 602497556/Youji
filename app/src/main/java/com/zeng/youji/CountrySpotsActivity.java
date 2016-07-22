@@ -1,7 +1,7 @@
 package com.zeng.youji;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -16,25 +16,25 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-import com.zeng.youji.adapter.CityInfoAdapter;
+import com.zeng.youji.adapter.CountrySpotsAdapter;
 import com.zeng.youji.bean.CItyInfo;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class CountryActivity extends AppCompatActivity {
+public class CountrySpotsActivity extends AppCompatActivity {
 
     private ListView mListView;
 
     private Toolbar toolbar;
 
-    private CityInfoAdapter cityInfoAdapter;
+    private CountrySpotsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_country);
+        setContentView(R.layout.activity_country_spots);
         initView();
         int id = getIntent().getIntExtra("id",0);
         if(id != 0){
@@ -70,16 +70,16 @@ public class CountryActivity extends AppCompatActivity {
                 List<CItyInfo> cItyInfoList = gson.fromJson(responseInfo.result,typeList);
                 if(cItyInfoList != null){
                     Log.d("************",cItyInfoList.size()+"***********");
-                    cityInfoAdapter = new CityInfoAdapter(getApplicationContext(),
-                                                            R.layout.countryactivity_lv_item,
+                    adapter = new CountrySpotsAdapter(getApplicationContext(),
+                                                            R.layout.country_spots_lv_item,
                                                             cItyInfoList);
-                    mListView.setAdapter(cityInfoAdapter);
+                    mListView.setAdapter(adapter);
                 }
             }
 
             @Override
             public void onFailure(HttpException e, String s) {
-                Toast.makeText(CountryActivity.this,"网络请求失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(CountrySpotsActivity.this,"网络请求失败",Toast.LENGTH_SHORT).show();
             }
         });
 

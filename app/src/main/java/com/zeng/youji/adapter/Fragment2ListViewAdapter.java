@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Administrator on 16-7-14.
  */
-public class AreaDataAdapter extends BaseAdapter {
+public class Fragment2ListViewAdapter extends BaseAdapter {
 
     private List<Area> areaList;
     private Context mContext;
@@ -26,7 +26,7 @@ public class AreaDataAdapter extends BaseAdapter {
     /*
     构造方法
      */
-    public AreaDataAdapter(Context context,List<Area> areas){
+    public Fragment2ListViewAdapter(Context context, List<Area> areas){
         super();
         this.mContext = context;
         this.areaList = areas;
@@ -60,7 +60,7 @@ public class AreaDataAdapter extends BaseAdapter {
         ViewHolder holder;
         if(convertView == null){
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.list_view_item_2,null,false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.fragment_2_lv_item,null,false);
             holder.tvCategory = (TextView) convertView.findViewById(R.id.tv_category);
             holder.myGridView = (MyGridView) convertView.findViewById(R.id.grid_view);
             convertView.setTag(holder);

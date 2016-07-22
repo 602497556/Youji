@@ -18,7 +18,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.zeng.youji.R;
-import com.zeng.youji.adapter.AreaDataAdapter;
+import com.zeng.youji.adapter.Fragment2ListViewAdapter;
 import com.zeng.youji.bean.Area;
 
 import java.lang.reflect.Type;
@@ -28,7 +28,7 @@ public class FragmentTab2 extends Fragment {
 
     private ListView listView;
 
-    private AreaDataAdapter areaDataAdapter;
+    private Fragment2ListViewAdapter adapter;
 
 
     @Override
@@ -50,9 +50,8 @@ public class FragmentTab2 extends Fragment {
                            List<Area> areaLists = gson.fromJson(responseInfo.result,listType);
                            if(areaLists != null){
                                Log.d("*************",areaLists.size()+"*************");
-                               areaDataAdapter = new AreaDataAdapter(getContext(),areaLists);
-                               listView.setAdapter(areaDataAdapter);
-
+                               adapter = new Fragment2ListViewAdapter(getContext(),areaLists);
+                               listView.setAdapter(adapter);
                            }
                        }
 
