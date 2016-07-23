@@ -9,9 +9,9 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/country_activity_tb"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="#019BE1"
-        app:navigationIcon="@mipmap/arrow_right"
+        app:navigationIcon="@mipmap/back_arrow"
         app:logo="@mipmap/ic_launcher"/>
 
     <ListView

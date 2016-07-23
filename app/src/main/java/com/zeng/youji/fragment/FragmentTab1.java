@@ -4,7 +4,6 @@ package com.zeng.youji.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,7 @@ public class FragmentTab1 extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab1, container, false);
         mListView = (ListView) view.findViewById(R.id.list_view);
         getData("http://chanyouji.com/api/trips/featured.json?page=1");
@@ -47,35 +46,39 @@ public class FragmentTab1 extends Fragment {
      */
     private void getData(String url) {
         HttpUtils http = new HttpUtils();
-        http.send( HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
-
-                    @Override
-                    public void onSuccess(ResponseInfo<String> responseInfo) {
-                        Log.d("******************",responseInfo.result+"**************");
-                        Type listType = new TypeToken<List<Bean1>>(){}.getType();
-                        Gson gson = new Gson();
-                        final List<Bean1> dateList = gson.fromJson(responseInfo.result,listType);
-                        if(dateList != null){
-                            adapter = new Fragment1ListViewAdapter(getContext(),R.layout.fragment_1_lv_item,dateList);
-                            mListView.setAdapter(adapter);
-                            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
-                                    Toast.makeText(getContext(),"你点击了："+i,Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getContext(), TripActivity.class);
-                                    intent.putExtra("trip_id",dateList.get(i).getId());
-                                    startActivity(intent);
-
-                                }
-                            });
+        http.send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                Type listType = new TypeToken<List<Bean1>>() {
+                }.getType();
+                Gson gson = new Gson();
+                final List<Bean1> dateList = gson.fromJson(responseInfo.result, listType);
+                if (dateList != null) {
+                    adapter = new Fragment1ListViewAdapter(getContext(), R.layout.fragment_1_lv_item, dateList);
+                    mListView.setAdapter(adapter);
+                    mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Toast.makeText(getContext(), "你点击了：" + i, Toast.LENGTH_SHORT).show();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("title_name",dateList.get(i).getName());
+                            bundle.putString("start_date",dateList.get(i).getStart_date());
+                            bundle.putInt("days",dateList.get(i).getDays());
+                            bundle.putString("cover_photo_url",dateList.get(i).getFront_cover_photo_url());
+                            bundle.putLong("trip_id",dateList.get(i).getId());
+                            Intent intent = new Intent(getContext(), TripActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
                         }
-                    }
+                    });
+                }
+            }
 
-                    @Override
-                    public void onFailure(HttpException e, String s) {
-                        Toast.makeText(getActivity(),"网络连接出错！",Toast.LENGTH_SHORT).show();
-                    }
-                });
+            @Override
+            public void onFailure(HttpException e, String s) {
+                Toast.makeText(getActivity(), "网络连接出错！", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
