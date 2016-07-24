@@ -1,10 +1,8 @@
 package com.zeng.youji;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,14 +21,12 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.google.gson.Gson;
-import com.jaeger.library.StatusBarUtil;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.zeng.youji.adapter.RecyclerViewAdapter;
-import com.zeng.youji.adapter.TripActivityListViewAdapter;
 import com.zeng.youji.bean.Trip;
 import com.zeng.youji.utils.MyDividerDecoration;
 
@@ -46,11 +41,7 @@ public class TripActivity extends AppCompatActivity {
 
     private HttpUtils httpUtils;
 
-    private TripActivityListViewAdapter adapter;
-
     private Toolbar toolbar;
-
-    private CoordinatorLayout rootLayout;
 
     private AppBarLayout appBarLayout;
 
@@ -61,18 +52,17 @@ public class TripActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private TextView titleName;
+    private TextView startDate;
     private ImageView coverImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_trip);
-        initViews(getIntent().getExtras());
 
-        recyclerView = (RecyclerView) findViewById(R.id.trip_activity_rv);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        initViews(getIntent().getExtras());
 
         long id = getIntent().getExtras().getLong("trip_id");
         stringBuilder = new StringBuilder("http://chanyouji.com/api/trips/").append(id).append(".json");
@@ -80,11 +70,23 @@ public class TripActivity extends AppCompatActivity {
         requestData(stringBuilder.toString());
     }
 
+    //初始化控件
     private void initViews(Bundle bundle) {
+        String coverImageUrl = bundle.getString("cover_photo_url");
+
+        recyclerView = (RecyclerView) findViewById(R.id.trip_activity_rv);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
         titleName = (TextView) findViewById(R.id.trip_activity_title);
         titleName.setText(bundle.getString("title_name"));
+
         coverImage = (ImageView) findViewById(R.id.trip_activity_cover_image);
-        Glide.with(this).load(bundle.getString("cover_photo_url")).into(coverImage);
+        Glide.with(this).load(coverImageUrl).into(coverImage);
+
+        startDate = (TextView) findViewById(R.id.trip_activity_start_date);
+        startDate.setText(bundle.getString("start_date")+" | "+bundle.getInt("days")+"天");
+
         toolbar = (Toolbar) findViewById(R.id.trip_activity_tb);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,23 +94,25 @@ public class TripActivity extends AppCompatActivity {
                 finish();
             }
         });
-        rootLayout = (CoordinatorLayout) findViewById(R.id.trip_activity_cl);
+//        rootLayout = (CoordinatorLayout) findViewById(R.id.trip_activity_cl);
         headLayout = (RelativeLayout) findViewById(R.id.trip_activity_head_layout);
         appBarLayout = (AppBarLayout) findViewById(R.id.trip_activity_app_bar);
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.trip_activity_collapsing_tb);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if(verticalOffset < -headLayout.getHeight()/2){
+                if(verticalOffset < -headLayout.getHeight()/2) {
                     mCollapsingToolbarLayout.setTitle("游");
+                    mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
                 } else {
                     mCollapsingToolbarLayout.setTitle("");
                 }
             }
         });
-        loadBlurAndStatusBar(bundle.getString("cover_photo_url"));
+        loadBlurAndStatusBar(coverImageUrl);
     }
 
+    //设置毛玻璃效果和沉浸式状态栏
     private void loadBlurAndStatusBar(String imageUrl) {
         //设置状态栏半透明
 //        StatusBarUtil.setTranslucent(TripActivity.this,StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA);
@@ -121,7 +125,6 @@ public class TripActivity extends AppCompatActivity {
 //              //  rootLayout.setBackground(resource);
 //            }
 //        });
-
         Glide.with(this).load(imageUrl).bitmapTransform(new BlurTransformation(this,100))
                 .into(new SimpleTarget<GlideDrawable>() {
             @Override
@@ -167,7 +170,7 @@ public class TripActivity extends AppCompatActivity {
                                 }
                             }
                     }
-                    Log.d("************",noteListTotal.size()+"");
+//                    Log.d("************",noteListTotal.size()+"");
 //                    adapter = new TripActivityListViewAdapter(getApplicationContext(),noteListTotal);
 //                    listView.setAdapter(adapter);
                     recyclerView.setAdapter(new RecyclerViewAdapter(TripActivity.this,noteListTotal));

@@ -48,7 +48,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
         holder.tvDay.setText("DAY"+noteList.get(position).getDay_note()+" "+noteList.get(position).getTrip_date_note());
-        holder.tvDescription.setText(noteList.get(position).getDescription());
+        String description = noteList.get(position).getDescription();
+        if(description != null){
+            holder.tvDescription.setText(noteList.get(position).getDescription());
+        } else {
+            holder.tvDescription.setText("<无描述信息>");
+        }
         Trip.TripDay.Node.Note.Photo photo = noteList.get(position).getPhoto();
         if(photo != null) {
             bitmapUtils.display(holder.ivPic,photo.getUrl(),displayConfig);

@@ -66,6 +66,7 @@ public class FragmentTab1 extends Fragment {
                             bundle.putInt("days",dateList.get(i).getDays());
                             bundle.putString("cover_photo_url",dateList.get(i).getFront_cover_photo_url());
                             bundle.putLong("trip_id",dateList.get(i).getId());
+                            bundle.putString("head_image_url",dateList.get(i).getUser().getImage());
                             Intent intent = new Intent(getContext(), TripActivity.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
