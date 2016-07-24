@@ -33,6 +33,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.zeng.youji.adapter.RecyclerViewAdapter;
 import com.zeng.youji.adapter.TripActivityListViewAdapter;
 import com.zeng.youji.bean.Trip;
+import com.zeng.youji.utils.MyDividerDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -169,9 +170,10 @@ public class TripActivity extends AppCompatActivity {
                     Log.d("************",noteListTotal.size()+"");
 //                    adapter = new TripActivityListViewAdapter(getApplicationContext(),noteListTotal);
 //                    listView.setAdapter(adapter);
-                    recyclerView.setAdapter(new RecyclerViewAdapter(getApplicationContext(),noteListTotal));
+                    recyclerView.setAdapter(new RecyclerViewAdapter(TripActivity.this,noteListTotal));
                     //使滑动流畅
                     recyclerView.setNestedScrollingEnabled(false);
+                    recyclerView.addItemDecoration(new MyDividerDecoration(TripActivity.this,MyDividerDecoration.VERTICAL_LIST));
                 }
             }
 
