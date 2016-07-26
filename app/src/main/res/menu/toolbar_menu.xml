@@ -8,13 +8,14 @@
         android:id="@+id/action_search"
         android:icon="@drawable/toolbar_search"
         android:title="搜索"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.widget.SearchView"/>
 
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/toolbar_profile"
         android:title="个人"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_0"

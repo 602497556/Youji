@@ -16,11 +16,11 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">22sp</item>
     </style>
-    
+
     <style name="Theme.ToolBar.More" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow.More</item>
     </style>
-    
+
     <style name="ActionButton.Overflow.More" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
         <item name="android:src">@mipmap/more_icon</item>
     </style>
@@ -45,9 +45,15 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
-    
-    
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

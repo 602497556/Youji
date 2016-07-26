@@ -4,13 +4,22 @@
     android:padding="5dp">
 
 
+    <!--<ListView-->
+        <!--android:id="@+id/list_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:dividerHeight="8dp"-->
+        <!--android:divider="@color/list_view_divider"/>-->
 
-    <ListView
-        android:id="@+id/list_view"
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="8dp"
-        android:divider="@color/list_view_divider"/>
+        android:layout_height="match_parent"
+        android:dividerHeight="10dp"
+        android:divider="@color/list_view_divider"
+        ptr:ptrDrawable="@drawable/default_ptr_flip"
+        ptr:ptrAnimationStyle="flip"/>
 
 
 </LinearLayout>
