@@ -16,6 +16,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.wang.avi.AVLoadingIndicatorView;
 import com.zeng.youji.adapter.CountrySpotsAdapter;
 import com.zeng.youji.bean.CItyInfo;
 
@@ -29,6 +30,8 @@ public class CountrySpotsActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
     private CountrySpotsAdapter adapter;
+
+    private AVLoadingIndicatorView loadingIndicatorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class CountrySpotsActivity extends AppCompatActivity {
     初始化控件,给Toolbar的导航图标设置点击事件
      */
     private void initView() {
+        loadingIndicatorView = (AVLoadingIndicatorView) findViewById(R.id.country_activity_loading_view);
         mListView = (ListView) findViewById(R.id.country_activity_lv);
         toolbar = (Toolbar) findViewById(R.id.country_activity_tb);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -65,6 +69,7 @@ public class CountrySpotsActivity extends AppCompatActivity {
         httpUtils.send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
+                loadingIndicatorView.setVisibility(View.GONE);
                 Type typeList = new TypeToken<List<CItyInfo>>(){}.getType();
                 Gson gson = new Gson();
                 List<CItyInfo> cItyInfoList = gson.fromJson(responseInfo.result,typeList);
@@ -79,6 +84,7 @@ public class CountrySpotsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(HttpException e, String s) {
+                loadingIndicatorView.setVisibility(View.GONE);
                 Toast.makeText(CountrySpotsActivity.this,"网络请求失败",Toast.LENGTH_SHORT).show();
             }
         });

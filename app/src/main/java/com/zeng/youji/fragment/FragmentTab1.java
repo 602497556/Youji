@@ -3,8 +3,6 @@ package com.zeng.youji.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +22,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.wang.avi.AVLoadingIndicatorView;
 import com.zeng.youji.R;
 import com.zeng.youji.TripActivity;
 import com.zeng.youji.adapter.Fragment1ListViewAdapter;
@@ -46,11 +45,14 @@ public class FragmentTab1 extends Fragment {
 
     private int page = 2;
 
+    private AVLoadingIndicatorView loadingView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab1, container, false);
 //        mListView = (ListView) view.findViewById(R.id.list_view);
+        loadingView = (AVLoadingIndicatorView) view.findViewById(R.id.fragment1_loading_view);
         pullToRefresh = (PullToRefreshListView) view.findViewById(R.id.pullToRefresh);
         getData("http://chanyouji.com/api/trips/featured.json?page=1");
         return view;
@@ -64,6 +66,7 @@ public class FragmentTab1 extends Fragment {
         httpUtils.send(HttpRequest.HttpMethod.GET, url, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
+                loadingView.setVisibility(View.GONE);
                 Type listType = new TypeToken<List<Bean1>>() {}.getType();
                 Gson gson = new Gson();
                 dateList = gson.fromJson(responseInfo.result, listType);
@@ -116,6 +119,7 @@ public class FragmentTab1 extends Fragment {
 
             @Override
             public void onFailure(HttpException e, String s) {
+                loadingView.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), "网络连接出错！", Toast.LENGTH_SHORT).show();
             }
         });
