@@ -1,43 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".MainActivity">
+
+    <ListView
+        android:id="@+id/country_activity_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:headerDividersEnabled="false"
+        android:dividerHeight="10dp"
+        android:divider="@color/list_view_divider"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"/>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/country_activity_loading_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        app:indicator="BallSpinFadeLoader"
+        app:indicator_color="#019BE1"/>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/country_activity_tb"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="#019BE1"
         app:navigationIcon="@mipmap/back_arrow"
         app:logo="@mipmap/ic_launcher"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F4F4F4">
-
-        <ListView
-            android:id="@+id/country_activity_lv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:dividerHeight="10dp"
-            android:divider="@color/list_view_divider"
-            android:paddingTop="3dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"/>
-
-        <com.wang.avi.AVLoadingIndicatorView
-            android:id="@+id/country_activity_loading_view"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerInParent="true"
-            android:visibility="visible"
-            app:indicator="BallSpinFadeLoader"
-            app:indicator_color="#019BE1"/>
-
-
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

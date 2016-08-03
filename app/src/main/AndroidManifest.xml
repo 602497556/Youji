@@ -20,7 +20,9 @@
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
-        <activity android:name=".CountrySpotsActivity" />
+        <activity
+            android:name=".CountrySpotsActivity"
+            android:theme="@style/AppTheme1"/>
         <activity android:name=".TripActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".SearchActivity">

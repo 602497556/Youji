@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="  个人设置"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="#019BE1"/>
 
         <View
@@ -37,27 +37,27 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="   点击登录"
-            android:textSize="20sp"/>
+            android:textSize="16sp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="#BCC0C3"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="   消息推送设置"
-            android:textSize="20sp"/>
+            android:textSize="16sp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="#BCC0C3"/>
 
         <TextView
@@ -65,7 +65,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="25dp"
             android:text="  其他"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="#019BE1"/>
 
         <View
@@ -76,27 +76,27 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="   清除浏览缓存"
-            android:textSize="20sp"/>
+            android:textSize="16sp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="#BCC0C3"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="   检查新版本"
-            android:textSize="20sp"/>
+            android:textSize="16sp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="#BCC0C3"/>
 
     </LinearLayout>

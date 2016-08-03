@@ -11,6 +11,10 @@
 
     </style>
 
+    <style name="AppTheme1" parent="Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
 
     <style name="ToolBarTitleTextAppearance">
         <item name="android:textColor">@android:color/white</item>
